@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Btn from "./components/Btn";
+import ContextProvider from "./components/ContextProvider";
+import Card from "./components/Card";
+import TextInput from "./components/TextInput";
+import { ButtonContext } from "./components/ContextProvider";
+
+
 
 function App() {
+  const [inputValue, setInputValue] = React.useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div style={{ margin: 10 }}>
+      <ContextProvider>
+        <TextInput />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <input
+            value={inputValue}
+            type="number"
+            style={{ padding: 10 }}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ButtonContext.Provider value={inputValue}>
+          <Card>
+            <Btn mode="add" value={inputValue} />
+            <Btn mode="subtract" />
+            <Btn mode="multiply" />
+            <Btn mode="divide" />
+            <Btn mode="reset input" />
+            <Btn mode="reset result" />
+          </Card>
+        </ButtonContext.Provider>
+      </ContextProvider>
     </div>
   );
 }
