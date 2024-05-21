@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStateContext,ButtonContext } from "./ContextProvider";
 
-export default function Btn({mode}) {
+export default function Btn({mode, reset}) {
   const {styleBtn, dispatch} = useStateContext();
   const value = React.useContext(ButtonContext);
 
@@ -16,10 +16,16 @@ export default function Btn({mode}) {
     };
 
   }
+console.log('mode value',mode, value)
+console.log(typeof value, typeof mode)
 
   const handleClick = () => {
-    if(mode === "add"){
-      dispatch({type: "add", payload:  parseInt(value) })
+    if(mode){
+      dispatch({type: mode, payload:  parseInt(value) })
+    }
+    
+    if(mode === "reset input") {
+      reset(0)
     }
   } 
 

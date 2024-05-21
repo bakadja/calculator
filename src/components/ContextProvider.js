@@ -1,7 +1,7 @@
 import React from "react";
 
 const StateContext  = React.createContext();
-// const initialState = {result: 0, input: 0};
+
 
 const initialState = 0;
 
@@ -15,10 +15,8 @@ const reducer = (state, action) => {
       return state * action.payload;
     case "divide":
       return state / action.payload;
-    case "reset input":
-      return action.payload;
     case "reset result":
-      return state;
+      return initialState;
     default:
       return state;
   }
